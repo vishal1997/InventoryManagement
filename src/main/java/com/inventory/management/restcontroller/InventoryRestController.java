@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import com.inventory.management.model.Range;
 @RestController
 @EnableWebMvc
 @RequestMapping("/api/v1/")
+@ComponentScan
 public class InventoryRestController {
 	
 	@Autowired
@@ -106,5 +108,13 @@ public class InventoryRestController {
 		} catch(Exception ex) {
 			throw ex;
 		}
+	}
+	
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public Map<String, String> get() {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Status", "Pass");
+		return map;
 	}
 }
