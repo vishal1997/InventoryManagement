@@ -20,4 +20,5 @@ public interface ProductRepository extends MongoRepository<DbProduct, String> {
 
 	public DbProduct findBySerialNumber(int serialNumber);
 	public boolean deleteBySerialNumber(int serialNumber);
+	public DbProduct findByProductName(String productName);
 }

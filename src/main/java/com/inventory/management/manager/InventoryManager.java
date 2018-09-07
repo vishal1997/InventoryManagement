@@ -24,4 +24,6 @@ public interface InventoryManager {
 	public List<DbSold> getAllSalesByPriceRange(double initialPrice, double finalPrice);
 	public List<DbSold> getAllSalesByDateRange(Date initialDate, Date finalDate);
 	public List<DbSold> getAllSalesByRange(Range range);
+	public List<Product> getSuggestion(String productName);
+	public Product getProduct(String productName);
 }

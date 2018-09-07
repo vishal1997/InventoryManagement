@@ -26,4 +26,6 @@ public interface InventoryDao {
 	public List<DbSold> getAllSalesByDateRange(Date initialDate, Date finalDate);
 	public List<DbSold> getAllSalesByRange(Range range);
 	public String addToSoldProduct(List<DbSold> dbSold);
+	public List<DbProduct> getSuggestion(String productName);
+	public DbProduct getProduct(String productName);
 }

@@ -183,4 +183,31 @@ public class InventoryDaoImpl implements InventoryDao {
 			throw new RuntimeException("Error occured");
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.dao.InventoryDao#getSuggestion(java.lang.String)
+	 */
+	@Override
+	public List<DbProduct> getSuggestion(String productName) {
+		try {
+			Query query = new Query(
+					Criteria.where("productName").regex(productName)
+				);
+			return mongoTemplate.find(query, DbProduct.class);
+		} catch(Exception ex) {
+			throw new RuntimeException("No data Found");
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.dao.InventoryDao#getProduct(java.lang.String)
+	 */
+	@Override
+	public DbProduct getProduct(String productName) {
+		try {
+			return productRepo.findByProductName(productName);
+		} catch(Exception ex) {
+			throw new RuntimeException("No data Found");
+		}
+	}
 }

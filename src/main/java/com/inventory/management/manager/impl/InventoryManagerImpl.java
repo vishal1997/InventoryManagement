@@ -94,5 +94,24 @@ public class InventoryManagerImpl implements InventoryManager {
 	public List<DbSold> getAllSalesByRange(Range range) {
 		return inventoryHelper.getAllSalesByRange(range);
 	}
+
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.manager.InventoryManager#getSuggestion(java.lang.String)
+	 */
+	@Override
+	public List<Product> getSuggestion(String productName) {
+		
+		return inventoryHelper.getSuggestion(productName);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.manager.InventoryManager#getProduct(java.lang.String)
+	 */
+	@Override
+	public Product getProduct(String productName) {
+		return inventoryHelper.getProduct(productName);
+	}
 	
 }

@@ -3,6 +3,7 @@
  */
 package com.inventory.management.restcontroller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.inventory.management.common.Constants.StatusCode;
 import com.inventory.management.dbmodel.DbProduct;
 import com.inventory.management.dbmodel.DbSold;
 import com.inventory.management.manager.InventoryManager;
@@ -43,19 +45,21 @@ public class InventoryRestController {
 		try {
 			status.put("Status",inventoryManager.purchaseProduct(product));
 		} catch(Exception ex) {
-			throw ex;
+			status.put("Status", StatusCode.ERROR);
+			return status;
 		}
 		return status;
 	}
 	
 	@RequestMapping(value = "sold", method = RequestMethod.POST)
-	public Map<String, String> saleProduct(List<Product> product) {
+	public Map<String, String> saleProduct(ArrayList<Product> product) {
 		
 		Map<String, String> status = new HashMap<String, String>();
 		try {
 			status.put("Status", inventoryManager.saleProduct(product));
 		} catch(Exception ex) {
-			throw ex;
+			status.put("Status", StatusCode.ERROR);
+			return status;
 		}
 		return status;
 	}
@@ -66,7 +70,7 @@ public class InventoryRestController {
 		try {
 			return inventoryManager.getAllProducts();
 		} catch (Exception ex){
-			throw ex;
+			return new ArrayList<Product>();
 		}
 	}
 	
@@ -76,37 +80,37 @@ public class InventoryRestController {
 		try {
 			return inventoryManager.getAllsalesDetails();
 		} catch(Exception ex) {
-			throw ex;
+			return new ArrayList<DbSold>();
 		}
 	}
 	
-	@RequestMapping(value = "getSalesDetails/priceRange", method = RequestMethod.GET) 
+	@RequestMapping(value = "getSalesDetails/priceRange", method = RequestMethod.POST) 
 	public List<DbSold> getAllSalesByPriceRange(@RequestBody final double initialPrice,
 												@RequestBody final double finalPrice) {
 		try {
 			return inventoryManager.getAllSalesByPriceRange(initialPrice, finalPrice);
 		} catch(Exception ex) {
-			throw ex;
+			return new ArrayList<DbSold>();
 		}
 	}
 	
-	@RequestMapping(value = "getSalesDetails/dateRange",method = RequestMethod.GET)
+	@RequestMapping(value = "getSalesDetails/dateRange",method = RequestMethod.POST)
 	public List<DbSold> getAllSalesByDateRange(@RequestBody final Date initialDate,
 												@RequestBody final Date finalDate) {
 		try {
 			return inventoryManager.getAllSalesByDateRange(initialDate, finalDate);
 		} catch(Exception ex) {
-			throw ex;
+			return new ArrayList<DbSold>();
 		}
 	}
 	
-	@RequestMapping(value = "getSalesDetails/range",method = RequestMethod.GET)
+	@RequestMapping(value = "getSalesDetails/range",method = RequestMethod.POST)
 	public List<DbSold> getAllSalesByRange(@RequestBody Range range) {
 		
 		try {
 			return inventoryManager.getAllSalesByRange(range);
 		} catch(Exception ex) {
-			throw ex;
+			return new ArrayList<DbSold>();
 		}
 	}
 	
@@ -116,5 +120,25 @@ public class InventoryRestController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Status", "Pass");
 		return map;
+	}
+	
+	@RequestMapping(value = "/getSuggestion", method = RequestMethod.POST)
+	public List<Product> getSuggestions(@RequestBody final String productName) {
+		
+		try {
+			return inventoryManager.getSuggestion(productName);
+		} catch(Exception ex) {
+			return new ArrayList<Product>();
+		}
+	}
+	
+	@RequestMapping(value = "/getProduct", method = RequestMethod.POST)
+	public Product getProduct(@RequestBody final String productName) {
+		
+		try {
+			return inventoryManager.getProduct(productName);
+		} catch(Exception ex) {
+			return new Product();
+		}
 	}
 }
