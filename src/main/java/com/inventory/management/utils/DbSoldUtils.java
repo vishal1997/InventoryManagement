@@ -33,4 +33,12 @@ public class DbSoldUtils {
 		}
 		return dbSoldList;
 	}
+	
+public DbSold convertProductToSoldProduct(Product product) {
+		
+		DbSold dbSold = new DbSold();
+		dbSold.setDate(new Date());
+		dbSold.setInvoiceNumber(product.getSerialNumber()+""+product.getQuantity()+""+new Date());
+		return dbSold;
+	}
 }

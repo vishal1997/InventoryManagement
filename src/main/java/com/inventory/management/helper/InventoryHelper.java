@@ -19,12 +19,14 @@ public interface InventoryHelper {
 
 	public String purchaseProduct(DbProduct product);
 	public String saleProduct(List<Product> product);
+	public String saleProduct(Product product);
 	public List<Product> getAllProducts();
 	public List<DbSold> getAllsalesDetails();
 	public List<DbSold> getAllSalesByPriceRange(double initialPrice, double finalPrice);
 	public List<DbSold> getAllSalesByDateRange(Date initialDate, Date finalDate);
 	public List<DbSold> getAllSalesByRange(Range range);
 	public String addToSoldProduct(List<Product> product);
+	public String addToSoldProduct(Product product);
 	public List<Product> getSuggestion(String productName);
 	public Product getProduct(String productName);
 }

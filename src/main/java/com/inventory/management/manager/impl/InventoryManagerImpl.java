@@ -113,5 +113,19 @@ public class InventoryManagerImpl implements InventoryManager {
 	public Product getProduct(String productName) {
 		return inventoryHelper.getProduct(productName);
 	}
+
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.manager.InventoryManager#saleProduct(com.inventory.management.model.Product)
+	 */
+	@Override
+	public String saleProduct(Product product) {
+		
+		String status = inventoryHelper.saleProduct(product);
+		if(!StatusCode.SUCCESS.equals(status)) {
+			return StatusCode.FAILED;
+		}
+		return inventoryHelper.addToSoldProduct(product);
+	}
 	
 }

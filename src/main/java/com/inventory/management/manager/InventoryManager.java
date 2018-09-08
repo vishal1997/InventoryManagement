@@ -19,6 +19,7 @@ public interface InventoryManager {
 
 	public String purchaseProduct(DbProduct product);
 	public String saleProduct(List<Product> product);
+	public String saleProduct(Product product);
 	public List<Product> getAllProducts();
 	public List<DbSold> getAllsalesDetails();
 	public List<DbSold> getAllSalesByPriceRange(double initialPrice, double finalPrice);

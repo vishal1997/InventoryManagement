@@ -51,12 +51,12 @@ public class InventoryRestController {
 		return status;
 	}
 	
-	@RequestMapping(value = "sold", method = RequestMethod.POST)
-	public Map<String, String> saleProduct(ArrayList<Product> product) {
+	@RequestMapping(value = "soldlist", method = RequestMethod.POST)
+	public Map<String, String> saleProductList(ArrayList<Product> products) {
 		
 		Map<String, String> status = new HashMap<String, String>();
 		try {
-			status.put("Status", inventoryManager.saleProduct(product));
+			status.put("Status", inventoryManager.saleProduct(products));
 		} catch(Exception ex) {
 			status.put("Status", StatusCode.ERROR);
 			return status;
@@ -140,5 +140,23 @@ public class InventoryRestController {
 		} catch(Exception ex) {
 			return new Product();
 		}
+	}
+	
+	@RequestMapping(value = "sold", method = RequestMethod.POST)
+	public Map<String, String> saleProduct(Product product) {
+		
+		Map<String, String> status = new HashMap<String, String>();
+		try {
+			System.out.println(product.getPrice());
+			System.out.println(product.getProductName());
+			System.out.println(product.getQuantity());
+			System.out.println(product.getSerialNumber());
+			status.put("Status", inventoryManager.saleProduct(product));
+		} catch(Exception ex) {
+			status.put("Status", StatusCode.ERROR);
+			System.out.println(ex);
+			return status;
+		}
+		return status;
 	}
 }

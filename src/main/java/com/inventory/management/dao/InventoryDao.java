@@ -20,12 +20,14 @@ public interface InventoryDao {
 	public String saleProduct(List<Integer> productId);
 	public DbProduct getProductByProductId(int productId);
 	public String updateProduct(List<DbProduct> dbProduct);
+	public String updateProduct(DbProduct dbProduct);
 	public List<DbProduct> getAllProducts();
 	public List<DbSold> getAllsalesDetails();
 	public List<DbSold> getAllSalesByPriceRange(double initialPrice, double finalPrice);
 	public List<DbSold> getAllSalesByDateRange(Date initialDate, Date finalDate);
 	public List<DbSold> getAllSalesByRange(Range range);
 	public String addToSoldProduct(List<DbSold> dbSold);
+	public String addToSoldProduct(DbSold dbSold);
 	public List<DbProduct> getSuggestion(String productName);
 	public DbProduct getProduct(String productName);
 }

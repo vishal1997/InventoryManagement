@@ -127,4 +127,24 @@ public class InventoryHelperImpl implements InventoryHelper {
 		Product product = productUtils.convertDbProductToProduct(inventoryDao.getProduct(productName));
 		return product;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.helper.InventoryHelper#saleProduct(com.inventory.management.model.Product)
+	 */
+	@Override
+	public String saleProduct(Product product) {
+		
+		DbProduct dbProduct = inventoryDao.getProductByProductId(product.getSerialNumber());
+		dbProduct = productUtils.updateProductQuantity(dbProduct, product);
+		return inventoryDao.updateProduct(dbProduct);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.helper.InventoryHelper#addToSoldProduct(com.inventory.management.model.Product)
+	 */
+	@Override
+	public String addToSoldProduct(Product product) {
+		DbSold dbSold = dbSoldUtils.convertProductToSoldProduct(product);
+		return inventoryDao.addToSoldProduct(dbSold);
+	}
 }

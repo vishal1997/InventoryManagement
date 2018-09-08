@@ -210,4 +210,30 @@ public class InventoryDaoImpl implements InventoryDao {
 			throw new RuntimeException("No data Found");
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.dao.InventoryDao#updateProductSold(com.inventory.management.dbmodel.DbProduct)
+	 */
+	@Override
+	public String updateProduct(DbProduct dbProduct) {
+		try {
+			productRepo.save(dbProduct);
+			return StatusCode.SUCCESS;
+		} catch(Exception ex) {
+			throw new RuntimeException("No data found");
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.inventory.management.dao.InventoryDao#addToSoldProduct(com.inventory.management.dbmodel.DbSold)
+	 */
+	@Override
+	public String addToSoldProduct(DbSold dbSold) {
+		try {
+			soldRepo.insert(dbSold);
+			return StatusCode.SUCCESS;
+		} catch(Exception ex) {
+			throw new RuntimeException("No data found");
+		}
+	}
 }
